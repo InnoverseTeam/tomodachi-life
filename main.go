@@ -2,7 +2,6 @@ package main
 
 import (
     "encoding/json"
-    "log"
     "net/http"
     "sync"
 )
@@ -53,14 +52,8 @@ func listUsers(w http.ResponseWriter, r *http.Request) {
     }
     json.NewEncoder(w).Encode(userList)
 }
-
-func main() {
+func setupRoutes() {
     http.HandleFunc("/addUser", addUser)
     http.HandleFunc("/getUser", getUser)
     http.HandleFunc("/listUsers", listUsers)
-
-    log.Println("Server started on :8080")
-    if err := http.ListenAndServe(":8080", nil); err != nil {
-        log.Fatal(err)
-    }
 }
